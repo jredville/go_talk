@@ -20,34 +20,26 @@ module Main
       @baz + 3
     end
   end
+end
 
-  def i_take_a_block
-    yield 'world'
-  end
+def i_take_a_block
+  yield 'world'
+end
 
-  def i_call_with_a_block
-    puts i_take_a_block do |f|
-      'hello' + f
-    end
-  end
+def i_call_with_a_block
+  puts i_take_a_block { |f| 'hello' + f }
+end
 
-  def emumeration(arr)
-    arr.each_with_index do |v, i|
-      puts "#{v} is at #{i}"
-    end
+def enumeration(arr)
+  arr.each_with_index do |v, i|
+    puts "#{v} is at #{i}"
   end
 end
 
-# Module depending on a duck type
-module Booable
-  def call_boo
-    puts boo
-  end
-end
+f = Main::Foo.new('abc')
 
-# Works for Booable
-class Booer
-  def boo
-    'boo'
-  end
-end
+puts f.bar
+
+i_call_with_a_block
+enumeration [1, 2, 3, 4]
+enumeration %w(1 2 3 4)

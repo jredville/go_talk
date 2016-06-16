@@ -24,7 +24,7 @@ func (f *Foo) Bar() string { //Exported with receiver
   return fmt.Sprintf("I haz %v", f.Foo)   // . access to pointer members
 }
 
-func (f *Foo) baz() int32 { // no receiver
+func (f *Foo) quux() int32 { // no receiver
   return f.baz + 3
 }
 
@@ -46,35 +46,13 @@ func enumeration(arr []interface{}) {
   }
 }
 
-// Booable is an interface
-type Booable interface {
-  Boo() string
-}
+func main() {
+  f := NewFoo("abc")
+  log.Println(f.Bar())
+  iCallWithAFunc()
+  arr := []interface{}{1, 2, 3, 4}
+  arr2 := []interface{}{"1", "2", "3", "4"}
 
-func callBoo(booer Booable) {
-  log.Println(booer.Boo())
+  enumeration(arr)
+  enumeration(arr2)
 }
-
-// Booer is a Booable
-type Booer struct {
-}
-
-// Boo satisfies Booable
-func (b *Booer) Boo() string {
-  return "boo"
-}
-
-func showBoo() {
- var b Booer
- callBoo(b)
-}
-
-type Inventory struct {
-	Material string
-	Count    uint
-}
-sweaters := Inventory{"wool", 17}
-tmpl, err := template.New("test").Parse("{{.Count}} items are made of {{.Material}}")
-if err != nil { panic(err) }
-err = tmpl.Execute(os.Stdout, sweaters)
-if err != nil { panic(err) }
