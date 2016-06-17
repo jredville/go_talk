@@ -1,0 +1,3 @@
+exercism.io
+golang-book.com/intro
+google Concurrency is not parallelism Robert Pike
